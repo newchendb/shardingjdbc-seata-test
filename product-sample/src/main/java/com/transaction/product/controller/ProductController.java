@@ -23,7 +23,7 @@ public class ProductController {
     @PutMapping("/minus/stock")
     public ResponseEntity<Void> minusStock() {
         productService.minusStock();
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }
