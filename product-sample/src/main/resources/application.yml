@@ -1,0 +1,33 @@
+server:
+  port: 8200
+
+spring:
+  application:
+    name: product
+  profiles:
+    active: db
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      password: nacos
+      username: nacos
+
+seata:
+  application-id: ${spring.application.name}
+  enabled: true
+  tx-service-group: my_test_tx_group
+  enable-auto-data-source-proxy: true
+  use-jdk-proxy: true
+  data-source-proxy-mode: AT
+  service:
+    vgroup-mapping:
+      my_test_tx_group: default
+    grouplist:
+      default: 127.0.0.1:8091
+
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true

@@ -1,0 +1,39 @@
+server:
+  port: 8600
+
+logging:
+  level:
+    root: info
+
+spring:
+  application:
+    name: sharding411-product
+  profiles:
+    active: db
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      password: nacos
+      username: nacos
+
+seata:
+  application-id: ${spring.application.name}
+  enabled: true
+  tx-service-group: my_test_tx_group
+  enable-auto-data-source-proxy: true
+  data-source-proxy-mode: AT
+#  use-jdk-proxy: true
+  service:
+    vgroup-mapping:
+      my_test_tx_group: default
+    grouplist:
+      default: 192.168.0.199:8091
+
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
